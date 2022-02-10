@@ -22,6 +22,68 @@
           <input type="text" class="form-control" id="salary" value="" />
         </div>
       </div>
+      <div class="row mt-4">
+        <div class="col-md-6">
+          <h6>Składki pracownika:</h6>
+          <table class="table table-striped table-hover">
+            <thead>
+              <tr>
+                <td>#</td>
+                <td>Nazwa Składki:</td>
+                <td>Kwota:</td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>Składka emerytalna - 9.76%:</td>
+                <td id="retirementContribution">-</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>Składka rentowa - 6.5%:</td>
+                <td id="pensionContribution">-</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>Składka chorobowa - 2.45%:</td>
+                <td id="sicknessContribution">-</td>
+              </tr>
+              <tr>
+                <td>4</td>
+                <td>
+                  Suma składek na ubezpieczenie społeczne finansowane przez
+                  pracownika:
+                </td>
+                <td id="workerSocialContributionSum">-</td>
+              </tr>
+              <tr>
+                <td>5</td>
+                <td>Podstawa wymiaru składki na ubezpieczenie zdrowotne:</td>
+                <td id="baseForHealthContribution">-</td>
+              </tr>
+              <tr>
+                <td>6</td>
+                <td>Składka na ubezpieczenie zdrowotne - 9%:</td>
+              </tr>
+              <tr>
+                <td>7</td>
+                <td>Zaliczka na podatek:</td>
+                <td id="advanceTax">-</td>
+              </tr>
+              <tr>
+                <td>8</td>
+                <td>Składka zdrowotna według stawki - 9%:</td>
+              </tr>
+              <tr class="table-success">
+                <td>9</td>
+                <td>Kwota netto</td>
+                <td id="finalWorkerNetMoney">-</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
 
     <script
