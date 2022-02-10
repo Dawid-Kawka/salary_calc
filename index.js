@@ -4,6 +4,33 @@ window.onload = function () {
 
 // składki z pensji pracownika
 class MonthlyEmployeeIncome {
+    // Składka emerytalna - 9.76%:
+    retirementContribution;
+
+    // Składka rentowa - 6.5%:
+    pensionContribution;
+
+    // Składka chorobowa - 2.45%:
+    sicknessContribution;
+
+    // Suma składek na ubezpieczenie społeczne finansowane przez pracownika:
+    workerSocialContributionSum;
+
+    // Podstawa wymiaru składki na ubezpieczenie zdrowotne:
+    baseForHealthContribution;
+
+    // Składka na ubezpieczenie zdrowotne - 9%:
+    healthContribution;
+
+    // Zaliczka na podatek:
+    advanceTax;
+
+    // Składka zdrowotna według stawki - 9%:</td>
+    healthAmountToEclude;
+
+    // Kwota netto
+    finalWorkerNetMoney;
+
     calculate(grossAmount, monthNum, accumulatedYearlyIncomeSum) {
 
     }
