@@ -7,6 +7,7 @@ window.onload = function () {
 class MonthlyEmployeeIncome {
     grossAmount; // kwota brutto
     accumulatedYearlyIncomeSum; // zakumulowany przychód od początku roku
+    monthNum;
 
     // Składka emerytalna - 9.76%:
     retirementContribution;
@@ -43,6 +44,7 @@ class MonthlyEmployeeIncome {
 
         this.grossAmount = grossAmount;
         this.accumulatedYearlyIncomeSum = accumulatedYearlyIncomeSum;
+        this.monthNum = monthNum;
 
         // Składka emerytalna - 9.76%:
         this.retirementContribution = grossAmount * 0.0976;
@@ -106,8 +108,57 @@ const monthlyIncome = new MonthlyEmployeeIncome();
 
 // składki pracodawcy
 class MonthlyEmployerCost {
+
+    grossAmount;
+    accumulatedYearlyIncomeSum;
+    monthNum;
+
+    // Składka na ubezpieczenie emerytalne - 9.76%:
+    employerRetirementContribution;
+
+    // Składka na ubezpieczenie rentowe - 6.5%:
+    employerPensionContribution;
+
+    // Składka na ubezpieczenie wypadkowe - 1.67%:
+    employerAccidentInsurance;
+
+    // Składka na fundusz pracy - 2.45%:
+    employerWorkFundContribution;
+
+    // Składka na fundusz Gwarantowanych Świadczeń Pracowniczych - 0.1%:
+    employerGuaranteedWorkFundContribution;
+
+    //Suma składek pracodawcy:
+    employerContributionSum;
+
     calculate(grossAmount, monthNum, accumulatedYearlyIncomeSum) {
         if (!accumulatedYearlyIncomeSum) accumulatedYearlyIncomeSum = 0;
+
+        this.grossAmount = grossAmount;
+        this.accumulatedYearlyIncomeSum = accumulatedYearlyIncomeSum;
+        this.monthNum = monthNum;
+
+        // Składka na ubezpieczenie emerytalne - 9.76%:
+        this.employerRetirementContribution = grossAmount * 0.0976;
+
+        // Składka na ubezpieczenie rentowe - 6.5%:
+        this.employerPensionContribution = grossAmount * 0.065;
+
+        // Składka na ubezpieczenie wypadkowe - 1.67%:
+        this.employerAccidentInsurance = grossAmount * 0.0167;
+
+        // Składka na fundusz pracy - 2.45%:
+        this.employerWorkFundContribution = grossAmount * 0.0245;
+
+        // Składka na fundusz Gwarantowanych Świadczeń Pracowniczych - 0.1%:
+        this.employerGuaranteedWorkFundContribution = grossAmount * 0.001;
+
+        //Suma składek pracodawcy:
+        this.employerContributionSum = this.employerRetirementContribution
+            + this.employerPensionContribution
+            + this.employerAccidentInsurance
+            + this.employerWorkFundContribution
+            + this.employerGuaranteedWorkFundContribution;
     }
 }
 
