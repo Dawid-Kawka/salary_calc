@@ -1,6 +1,6 @@
 window.onload = function () {
     ui.init();
-    ui.salaryChange();
+    // ui.salaryChange();  // testowy
 };
 
 // składki z pensji pracownika
@@ -176,7 +176,7 @@ class Ui {
     salaryChange = (e) => {
         if (e) this.salaryGross = e.target.value;
 
-        this.salaryGross = 2600;
+        // this.salaryGross = 2600;  //testowy
 
         if (!this.salaryGross || isNaN(this.salaryGross)) this.salaryGross = 0;
         console.log(this.salaryGross);
@@ -188,6 +188,7 @@ class Ui {
     }
 
     updateDom = () => {
+        // Pracownik
         this.setValueById("retirementContribution", monthlyIncome.retirementContribution.toFixed(2));
         this.setValueById("pensionContribution", monthlyIncome.pensionContribution.toFixed(2));
         this.setValueById("sicknessContribution", monthlyIncome.sicknessContribution.toFixed(2));
@@ -197,6 +198,14 @@ class Ui {
         this.setValueById("advanceTax", monthlyIncome.advanceTax.toFixed(2));
         this.setValueById("healthAmountToEclude", monthlyIncome.healthAmountToEclude.toFixed(2));
         this.setValueById("finalWorkerNetMoney", monthlyIncome.finalWorkerNetMoney.toFixed(2));
+
+        // Pracodawca
+        this.setValueById("employerRetirementContribution", monthlyEmplyerCost.employerRetirementContribution.toFixed(2));
+        this.setValueById("employerPensionContribution", monthlyEmplyerCost.employerPensionContribution.toFixed(2));
+        this.setValueById("employerAccidentInsurance", monthlyEmplyerCost.employerAccidentInsurance.toFixed(2));
+        this.setValueById("employerWorkFundContribution", monthlyEmplyerCost.employerWorkFundContribution.toFixed(2));
+        this.setValueById("employerGuaranteedWorkFundContribution", monthlyEmplyerCost.employerGuaranteedWorkFundContribution.toFixed(2));
+        this.setValueById("employerContributionSum", monthlyEmplyerCost.employerContributionSum.toFixed(2));
     }
 
     setValueById(id, v) {
