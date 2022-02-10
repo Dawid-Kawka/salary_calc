@@ -137,7 +137,19 @@ class Ui {
     }
 
     updateDom = () => {
+        this.setValueById("retirementContribution", monthlyIncome.retirementContribution.toFixed(2));
+        this.setValueById("pensionContribution", monthlyIncome.pensionContribution.toFixed(2));
+        this.setValueById("sicknessContribution", monthlyIncome.sicknessContribution.toFixed(2));
+        this.setValueById("workerSocialContributionSum", monthlyIncome.workerSocialContributionSum.toFixed(2));
+        this.setValueById("baseForHealthContribution", monthlyIncome.baseForHealthContribution.toFixed(2));
+        this.setValueById("healthContribution", monthlyIncome.healthContribution.toFixed(2));
+        this.setValueById("advanceTax", monthlyIncome.advanceTax.toFixed(2));
+        this.setValueById("healthAmountToEclude", monthlyIncome.healthAmountToEclude.toFixed(2));
+        this.setValueById("finalWorkerNetMoney", monthlyIncome.finalWorkerNetMoney.toFixed(2));
+    }
 
+    setValueById(id, v) {
+        document.getElementById(id).innerHTML = v + "zł";
     }
 }
 
