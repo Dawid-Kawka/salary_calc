@@ -68,6 +68,7 @@ class MonthlyEmployeeIncome {
         this.healthContribution = this.baseForHealthContribution * 0.09;
         console.log("Składka na ubezpieczenie zdrowotne - 9%: ", this.healthContribution);
 
+        // Zaliczka na podatek:
         this.icome = Math.ceil(this.baseForHealthContribution - 250);
         console.log("Dochód: ", this.icome)
 
@@ -79,19 +80,25 @@ class MonthlyEmployeeIncome {
             const taxAbove85k = ((this.icome + accumulatedYearlyIncomeSum) - 85528) * 0.32;
             console.log("Podatek powyżej 85528: ", taxAbove85k);
             this.advanceTax += taxAbove85k;
+        } else if (this.icome + accumulatedYearlyIncomeSum >= 85528) {
+            this.advanceTax = this.icome * 0.32;
+            console.log("Kolejny miesiąc z podatkiem 32%: ", this.advanceTax)
+        } else {
+            this.advanceTax = (this.icome * 0.17) - 43.76;
+            console.log("Zaliczka na podatek, pierwszy próg 17%: ", this.advanceTax)
         }
 
-        // Zaliczka na podatek:
-        this.advanceTax =
-            console.log("Składka rentowa - 6.5%: ", this.pensionContribution);
+        // Składka zdrowotna według stawki - 7.75%:</td>
+        this.healthAmountToEclude = this.baseForHealthContribution * 0.0775;
+        console.log("Składka zdrowotna według stawki - 7.75%: ", this.healthAmountToEclude);
 
-        // Składka zdrowotna według stawki - 9%:</td>
-        healthAmountToEclude;
-        console.log("Składka rentowa - 6.5%: ", this.pensionContribution);
+        // ostateczna zaliczka na podatek dochodowy
+        this.advanceTax = Math.floor(this.advanceTax - this.healthAmountToEclude);
+        console.log("Zaliczka na podatek dochodowy, wartość końcowa: ", this.advanceTax)
 
         // Kwota netto
-        finalWorkerNetMoney;
-        console.log("Składka rentowa - 6.5%: ", this.pensionContribution);
+        this.finalWorkerNetMoney = grossAmount - this.workerSocialContributionSum - this.healthContribution - this.advanceTax;
+        console.log("Kwota netto: ", this.finalWorkerNetMoney);
     }
 }
 
