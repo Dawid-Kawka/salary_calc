@@ -1,9 +1,13 @@
 window.onload = function () {
     ui.init();
+    ui.salaryChange();
 };
 
 // składki z pensji pracownika
 class MonthlyEmployeeIncome {
+    grossAmount; // kwota brutto
+    accumulatedYearlyIncomeSum; // zakumulowany przychód od początku roku
+
     // Składka emerytalna - 9.76%:
     retirementContribution;
 
@@ -31,8 +35,63 @@ class MonthlyEmployeeIncome {
     // Kwota netto
     finalWorkerNetMoney;
 
-    calculate(grossAmount, monthNum, accumulatedYearlyIncomeSum) {
+    // Dochód, który jest wynikiem pomniejszenia o koszty uzyskania przychodu 250zł
+    icome;
 
+    calculate(grossAmount, monthNum, accumulatedYearlyIncomeSum) {
+        if (!accumulatedYearlyIncomeSum) accumulatedYearlyIncomeSum = 0;
+
+        this.grossAmount = grossAmount;
+        this.accumulatedYearlyIncomeSum = accumulatedYearlyIncomeSum;
+
+        // Składka emerytalna - 9.76%:
+        this.retirementContribution = grossAmount * 0.0976;
+        console.log("Składka emerytalna - 9.76%: ", this.retirementContribution);
+
+        // Składka rentowa - 1.5%:
+        this.pensionContribution = grossAmount * 0.015;
+        console.log("Składka rentowa - 1.5%: ", this.pensionContribution);
+
+        // Składka chorobowa - 2.45%:
+        this.sicknessContribution = grossAmount * 0.0245;
+        console.log("Składka chorobowa - 2.45%: ", this.sicknessContribution);
+
+        // Suma składek na ubezpieczenie społeczne finansowane przez pracownika:
+        this.workerSocialContributionSum = this.retirementContribution + this.pensionContribution + this.sicknessContribution;
+        console.log("Suma składek na ubezpieczenie społeczne finansowane przez pracownika: ", this.workerSocialContributionSum);
+
+        // Podstawa wymiaru składki na ubezpieczenie zdrowotne:
+        this.baseForHealthContribution = grossAmount - this.workerSocialContributionSum;
+        console.log("Podstawa wymiaru składki na ubezpieczenie zdrowotne: ", this.baseForHealthContribution);
+
+        // Składka na ubezpieczenie zdrowotne - 9%:
+        this.healthContribution = this.baseForHealthContribution * 0.09;
+        console.log("Składka na ubezpieczenie zdrowotne - 9%: ", this.healthContribution);
+
+        this.icome = Math.ceil(this.baseForHealthContribution - 250);
+        console.log("Dochód: ", this.icome)
+
+        if (accumulatedYearlyIncomeSum < 85528 && this.icome + accumulatedYearlyIncomeSum >= 85528) {
+            // pierwszy miesiąc gdzie przekroczony został próg 17% do 85tyś, 32% ponad 85tyś
+            this.advanceTax = this.icome * 0.17;
+            console.log("Miesiąc z przekroczeniem pierwszego progu podatku 17%: ", this.advanceTax)
+
+            const taxAbove85k = ((this.icome + accumulatedYearlyIncomeSum) - 85528) * 0.32;
+            console.log("Podatek powyżej 85528: ", taxAbove85k);
+            this.advanceTax += taxAbove85k;
+        }
+
+        // Zaliczka na podatek:
+        this.advanceTax =
+            console.log("Składka rentowa - 6.5%: ", this.pensionContribution);
+
+        // Składka zdrowotna według stawki - 9%:</td>
+        healthAmountToEclude;
+        console.log("Składka rentowa - 6.5%: ", this.pensionContribution);
+
+        // Kwota netto
+        finalWorkerNetMoney;
+        console.log("Składka rentowa - 6.5%: ", this.pensionContribution);
     }
 }
 
@@ -41,7 +100,7 @@ const monthlyIncome = new MonthlyEmployeeIncome();
 // składki pracodawcy
 class MonthlyEmployerCost {
     calculate(grossAmount, monthNum, accumulatedYearlyIncomeSum) {
-
+        if (!accumulatedYearlyIncomeSum) accumulatedYearlyIncomeSum = 0;
     }
 }
 
@@ -57,7 +116,10 @@ class Ui {
     }
 
     salaryChange = (e) => {
-        this.salaryGross = e.target.value;
+        if (e) this.salaryGross = e.target.value;
+
+        this.salaryGross = 2600;
+
         if (!this.salaryGross || isNaN(this.salaryGross)) this.salaryGross = 0;
         console.log(this.salaryGross);
 
